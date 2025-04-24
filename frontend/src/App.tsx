@@ -1,12 +1,24 @@
 import React from 'react';
-import PostForm from './components/PostForm';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import CategoryThreads from './pages/CategoryThreads';
+import ThreadDetail from './pages/ThreadDetail';
+import Profile from './pages/Profile';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-      <h1 className="text-3xl font-bold my-8">ConnectSphere</h1>
-      <PostForm threadId="sample-thread-id" userId="sample-user-id" />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-100">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/category/:categoryId" element={<CategoryThreads />} />
+          <Route path="/thread/:threadId" element={<ThreadDetail />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
