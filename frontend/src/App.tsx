@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import NavBar from './components/NavBar'; // Ensure this matches the filename
 import Home from './pages/Home';
 import CategoryThreads from './pages/CategoryThreads';
 import ThreadDetail from './pages/ThreadDetail';
@@ -10,7 +10,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
-        <Navbar />
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:categoryId" element={<CategoryThreads />} />

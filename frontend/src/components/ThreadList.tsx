@@ -15,13 +15,26 @@ interface ThreadListProps {
 
 const ThreadList: React.FC<ThreadListProps> = ({ categoryId }) => {
   const [threads, setThreads] = useState<Thread[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/categories/${categoryId}/threads`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch threads');
+        }
+        return res.json();
+      })
       .then((data) => setThreads(data))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setError('Failed to load threads');
+      });
   }, [categoryId]);
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
 
   return (
     <div className="space-y-4">
